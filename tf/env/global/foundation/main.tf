@@ -17,6 +17,9 @@ terraform {
     storage_account_name = "stglobaldevopseuskgm"
     container_name       = "global-terraform"
     key                  = "global/foundation/terraform.tfstate"
+    use_oidc             = true
+    subscription_id      = "abb82d8d-8e09-4f86-b9de-658026c56b11"
+    tenant_id            = "567e2175-bf4e-4bcc-b114-335fa0061f2f"
   } 
 }
 
