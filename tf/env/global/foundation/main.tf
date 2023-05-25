@@ -73,14 +73,14 @@ resource "random_string" "suffix" {
   number  = false
 }
 
-data "azurerm_subscription" "primary" {
-}
+# data "azurerm_subscription" "primary" {
+# }
 
-data "azurerm_client_config" "current" {
-}
+# data "azurerm_client_config" "current" {
+# }
 
-resource "azurerm_role_assignment" "current" {
-  scope                = data.azurerm_subscription.primary.id
-  role_definition_name = "Storage Blob Data Owner"
-  principal_id         = data.azurerm_client_config.current.object_id
-}
+# resource "azurerm_role_assignment" "current" {
+#   scope                = data.azurerm_subscription.primary.id
+#   role_definition_name = "Storage Blob Data Owner"
+#   principal_id         = data.azurerm_client_config.current.object_id
+# }
