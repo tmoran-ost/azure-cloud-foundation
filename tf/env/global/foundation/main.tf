@@ -79,7 +79,7 @@ data "azurerm_subscription" "primary" {
 data "azurerm_client_config" "init" {
 }
 
-resource "azurerm_role_definition" "storage_blob_data_owner" {
+resource "azurerm_role_definition" "init" {
   role_definition_id = "00000000-0000-0000-0000-000000000000"
   name               = "Storage Blob Data Owner"
   scope              = data.azurerm_subscription.primary.id
