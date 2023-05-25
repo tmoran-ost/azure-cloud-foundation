@@ -81,6 +81,6 @@ data "azurerm_client_config" "init" {
 
 resource "azurerm_role_assignment" "init" {
   scope                = data.azurerm_subscription.primary.id
-  role_definition_name = "Reader"
+  role_definition_name = "Storage Blob Data Owner"
   principal_id         = data.azurerm_client_config.init.object_id
 }
