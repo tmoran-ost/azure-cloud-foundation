@@ -69,7 +69,7 @@ jobs:
             #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
             <details><summary>Show Prod Plan</summary>\n
             \`\`\`\n
-            ${process.env.PLAN}
+            ${{process.env.PLAN}}
             \`\`\`
             </details>
             Pushed by: @${{ github.actor }}, Action: ${{ github.event_name }}`;
