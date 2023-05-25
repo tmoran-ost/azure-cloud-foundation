@@ -27,6 +27,7 @@ terraform {
 provider "azurerm" {
   features {}
   subscription_id = var.environments.shared.sub
+  use_oidc = true
 }
 
 provider "azuread" {
