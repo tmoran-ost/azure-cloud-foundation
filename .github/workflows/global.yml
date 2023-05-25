@@ -68,14 +68,16 @@ jobs:
             #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
             #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
 
-            <details><summary>Show Prod Plan</summary>\n
+            <details>
+            
+            <summary>Show Prod Plan</summary>\n
 
             \`\`\`\n
             ${process.env.PLAN}
-
             \`\`\`
-            </details>
             
+            </details>
+
             Pushed by: @${{ github.actor }}, Action: ${{ github.event_name }}`;
             github.rest.issues.createComment({
               issue_number: context.issue.number,
