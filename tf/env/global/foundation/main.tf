@@ -5,7 +5,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "=2.98.0"
+      
     }
     azuread = {
       source = "hashicorp/azuread"
@@ -27,7 +27,7 @@ terraform {
 provider "azurerm" {
   features {}
   subscription_id = var.environments.shared.sub
-  //use_oidc = true
+  use_oidc = true
 }
 
 provider "azuread" {
