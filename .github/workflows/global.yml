@@ -37,9 +37,9 @@ jobs:
         with:
           terraform_version: 1.4.6
 
-      # - name: Terraform Format
-      #   id: fmt
-      #   run: terraform fmt -check
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
 
       - name: Terraform Init
         id: init
@@ -79,7 +79,7 @@ jobs:
             </details>
 
             Pushed by: @${{ github.actor }}, Action: ${{ github.event_name }}`;
-            
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
