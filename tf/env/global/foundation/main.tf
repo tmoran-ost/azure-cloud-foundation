@@ -79,24 +79,8 @@ data "azurerm_subscription" "primary" {
 data "azurerm_client_config" "init" {
 }
 
-resource "azurerm_role_definition" "init" {
-  role_definition_id = "00000000-0000-0000-0000-000000000000"
-  name               = "Storage Blob Data Owner"
-  scope              = data.azurerm_subscription.primary.id
-
-  permissions {
-    actions     = ["Microsoft.Resources/subscriptions/resourceGroups/read"]
-    not_actions = []
-  }
-
-  assignable_scopes = [
-    data.azurerm_subscription.primary.id,
-  ]
-}
-
 resource "azurerm_role_assignment" "init" {
-  name               = "00000000-0000-0000-0000-000000000000"
-  scope              = data.azurerm_subscription.primary.id
-  role_definition_id = azurerm_role_definition.storage_blob_data_owner.role_definition_resource_id
-  principal_id       = data.azurerm_client_config.init.object_id
+  scope                = data.azurerm_subscription.primary.id
+  role_definition_name = "Reader"
+  principal_id         = data.azurerm_client_config.init.object_id
 }
