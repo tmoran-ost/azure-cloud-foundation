@@ -6,6 +6,7 @@ variable "tags" {}
 variable "environments" {
   
 }
+variable "cust_management_group" {}
 
 # Used during initial deployment when run locally outside of ADO
 #variable "client_id" { default = "" } # Uncomment to run local, comment out for Azure DevOps
