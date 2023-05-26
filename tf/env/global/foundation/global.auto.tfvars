@@ -1,7 +1,7 @@
 #Environment names
 environment_prefix = "global"
 
-# ost_admins_group = "OSTAdmins"
+ost_admins_group = "OSTAdmins"
 
 primary_location = {
   name   = "East US"
