@@ -8,6 +8,8 @@ primary_location = {
   prefix = "eus"
 }
 
+cust_management_group = "OST-IT"
+
 tags = {
   environment = "global"
   category    = "DevOps"
