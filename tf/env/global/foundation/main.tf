@@ -5,6 +5,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
+      version = "3.58.0"
       
     }
     azuread = {
@@ -70,7 +71,7 @@ resource "random_string" "suffix" {
   length  = 3
   special = false
   upper   = false
-  number  = false
+  numeric  = false
 }
 
 # data "azurerm_subscription" "primary" {
