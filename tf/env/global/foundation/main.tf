@@ -74,18 +74,25 @@ resource "random_string" "suffix" {
   numeric  = false
 }
 
+data "azurerm_subscription" "primary" {}
+
+data "azurerm_client_config" "current" {}
+data "azuread_client_config" "current" {}
+data "azuread_group" "admins" {
+  display_name = "OSTAdmins"
+}
+
+data "azuread_service_principal" "globalsp" {
+  display_name = "sp-global-owner-azuredevops"
+}
+
 # Level 1 - Reference Customer-created top-level management group beneath "Tenant Root Group":
 data "azurerm_management_group" "mg-customer_root" {
   name = var.cust_management_group
 }
 
-# Level 2
-resource "azurerm_management_group" "mg-platform" {
-  name                       = "Platform"
-  display_name               = "Platform"
-  parent_management_group_id = data.azurerm_management_group.mg-customer_root.id
-
-  subscription_ids = [
-    var.environments.shared.sub
-  ]
+resource "azurerm_role_assignment" "role-mg-customer-root-owner" {
+  scope                = data.azurerm_management_group.mg-customer_root.id
+  role_definition_name = "Owner"
+  principal_id         = data.azuread_group.admins.object_id
 }
