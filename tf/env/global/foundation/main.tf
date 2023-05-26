@@ -74,14 +74,18 @@ resource "random_string" "suffix" {
   numeric  = false
 }
 
-# data "azurerm_subscription" "primary" {
-# }
+# Level 1 - Reference Customer-created top-level management group beneath "Tenant Root Group":
+data "azurerm_management_group" "mg-customer_root" {
+  name = var.cust_management_group
+}
 
-# data "azurerm_client_config" "current" {
-# }
+# Level 2
+resource "azurerm_management_group" "mg-platform" {
+  name                       = "Platform"
+  display_name               = "Platform"
+  parent_management_group_id = data.azurerm_management_group.mg-customer_root.id
 
-# resource "azurerm_role_assignment" "current" {
-#   scope                = data.azurerm_subscription.primary.id
-#   role_definition_name = "Storage Blob Data Owner"
-#   principal_id         = data.azurerm_client_config.current.object_id
-# }
+  subscription_ids = [
+    var.environments.shared.sub
+  ]
+}
