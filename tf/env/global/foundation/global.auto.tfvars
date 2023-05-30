@@ -8,6 +8,8 @@ primary_location = {
   prefix = "eus"
 }
 
+cust_management_group = "DEMO-IT"
+
 tags = {
   environment = "global"
   category    = "DevOps"

@@ -5,7 +5,11 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "=2.98.0"
+      version = "3.58.0"
+    }
+    azuread = {
+      source = "hashicorp/azuread"
+      version = "2.39.0"
     }
   }
   backend "azurerm" {
@@ -13,15 +17,22 @@ terraform {
     storage_account_name = "stglobaldevopseuskgm"
     container_name       = "global-terraform"
     key                  = "global/foundation/terraform.tfstate"
+    use_oidc             = true
+    subscription_id      = "abb82d8d-8e09-4f86-b9de-658026c56b11"
+    tenant_id            = "567e2175-bf4e-4bcc-b114-335fa0061f2f"
   } 
 }
 
 # Configure the providers
 provider "azurerm" {
+  use_oidc = true
   features {}
-  subscription_id = var.environments.shared.sub
 }
 
+
+provider "azuread" {
+  use_oidc = true
+}
 resource "azurerm_resource_group" "init" {
   location = var.primary_location.name
   name     = "rg-global-devops-${var.primary_location.prefix}"
@@ -58,5 +69,29 @@ resource "random_string" "suffix" {
   length  = 3
   special = false
   upper   = false
-  number  = false
+  numeric  = false
+}
+
+data "azurerm_subscription" "primary" {}
+
+data "azurerm_client_config" "current" {}
+data "azuread_client_config" "current" {}
+data "azuread_group" "admins" {
+  display_name = "OSTAdmins"
+}
+
+data "azuread_service_principal" "globalsp" {
+  display_name = "azure-cloud-foundation"
+}
+
+# Level 1 - Reference Customer-created top-level management group beneath "Tenant Root Group":
+data "azurerm_management_group" "mg-customer_root" {
+  name = var.cust_management_group
+}
+
+resource "azurerm_role_assignment" "role-mg-customer-root-owner" {
+  scope                = data.azurerm_management_group.mg-customer_root.id
+  role_definition_name = "Owner"
+  principal_id         = data.azuread_group.admins.object_id
+
 }
