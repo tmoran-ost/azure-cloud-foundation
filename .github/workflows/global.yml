@@ -54,11 +54,13 @@ jobs:
         id: plan
         if: github.event_name == 'pull_request'
         run: terraform plan -out=terraform_plan -no-color 
+        continue-on-error: true
+      - name: Test
+        run: echo test > artifacts/test.txt
         uses: actions/upload-artifact@v3
         with:
-          name: terraform_plan.tfplan
-          path: artifacts/terraform_plan.tfplan
-        continue-on-error: true
+          name: test
+          path: artifacts/test.txt
       
 
       - name: Update Pull Request
