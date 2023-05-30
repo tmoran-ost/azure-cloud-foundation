@@ -7,10 +7,6 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "=2.98.0"
     }
-    azuread = {
-      source = "hashicorp/azuread"
-      version = "=2.22.0"
-    }
   }
   backend "azurerm" {
     resource_group_name  = "rg-global-devops-eus"
@@ -24,10 +20,6 @@ terraform {
 provider "azurerm" {
   features {}
   subscription_id = var.environments.shared.sub
-}
-
-provider "azuread" {
-  tenant_id = data.azurerm_client_config.current.tenant_id
 }
 
 resource "azurerm_resource_group" "init" {
