@@ -8,10 +8,6 @@ terraform {
       version = "3.58.0"
       
     }
-    azuread = {
-      source = "hashicorp/azuread"
-      version = "=2.39.0"
-    }
   }
   backend "azurerm" {
     resource_group_name  = "rg-global-devops-eus"
@@ -26,13 +22,8 @@ terraform {
 
 # Configure the providers
 provider "azurerm" {
-  features {}
-  # subscription_id = var.environments.shared.sub
   use_oidc = true
-}
-
-provider "azuread" {
-  tenant_id = data.azurerm_client_config.current.tenant_id
+  features {}
 }
 
 resource "azurerm_resource_group" "init" {
