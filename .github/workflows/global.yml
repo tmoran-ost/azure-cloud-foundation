@@ -55,13 +55,13 @@ jobs:
         if: github.event_name == 'pull_request'
         run: terraform plan -out=terraform_plan -no-color 
         continue-on-error: true
-      - name: Test
-        run: echo test > ./artifacts/test.txt
+
+
+      - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: test
-          path: ./artifacts/test.txt
-          if-no-files-found: warn
+          name: terraform_plan
+          path: ./tf/env/global/foundation/terraform_plan.tfplan
       
 
       - name: Update Pull Request
