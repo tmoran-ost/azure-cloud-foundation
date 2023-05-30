@@ -61,7 +61,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: terraform_plan
-          path: ./terraform_plan
+          path: tf/env/global/foundation/terraform_plan
       
 
       - name: Update Pull Request
