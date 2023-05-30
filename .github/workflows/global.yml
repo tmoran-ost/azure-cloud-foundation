@@ -50,7 +50,11 @@ jobs:
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform plan -out=terraform_plan -no-color
+        run: echo terraform plan -out=terraform_plan -no-color > tf/env/global/foundation/terraform.tfplan
+        uses: actions/upload-artifact@v3
+        with:
+          name: terraform.tfplan
+          path: tf/env/global/foundation/terraform.tfplan
         continue-on-error: true
 
       - name: Update Pull Request
@@ -89,4 +93,4 @@ jobs:
         run: exit 1
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply terraform_plan.tfplan
+        run: terraform apply terraform_plan
