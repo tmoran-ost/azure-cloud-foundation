@@ -50,7 +50,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: echo terraform plan -out=terraform_plan -no-color > tf/env/global/foundation/terraform.tfplan
+        run: echo terraform plan -no-color > tf/env/global/foundation/terraform.tfplan
         uses: actions/upload-artifact@v3
         with:
           name: terraform.tfplan
