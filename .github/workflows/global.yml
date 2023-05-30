@@ -47,17 +47,17 @@ jobs:
         id: validate
         run: terraform validate -no-color
 
-      - name: Artifacts Directory
-        run: mkdir -p artifacts
+      # - name: Artifacts Directory
+      #   run: mkdir -p artifacts
 
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: echo terraform plan -no-color > artifacts/terraform.tfplan
-        uses: actions/upload-artifact@v3
-        with:
-          name: terraform.tfplan
-          path: artifacts/terraform.tfplan
+        run: echo terraform plan -no-color 
+        # uses: actions/upload-artifact@v3
+        # with:
+        #   name: terraform.tfplan
+        #   path: artifacts/terraform.tfplan
         continue-on-error: true
       
 
