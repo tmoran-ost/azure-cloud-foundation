@@ -56,7 +56,7 @@ jobs:
         run: terraform plan -out=terraform_plan -no-color 
         continue-on-error: true
       - name: Test
-        run: echo test > artifacts/test.txt
+        run: echo test > ./artifacts/test.txt
         uses: actions/upload-artifact@v3
         with:
           name: test
