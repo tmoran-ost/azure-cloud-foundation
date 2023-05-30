@@ -29,10 +29,10 @@ provider "azurerm" {
   features {}
 }
 
+
 provider "azuread" {
   use_oidc = true
 }
-
 resource "azurerm_resource_group" "init" {
   location = var.primary_location.name
   name     = "rg-global-devops-${var.primary_location.prefix}"
@@ -93,4 +93,5 @@ resource "azurerm_role_assignment" "role-mg-customer-root-owner" {
   scope                = data.azurerm_management_group.mg-customer_root.id
   role_definition_name = "Owner"
   principal_id         = data.azuread_group.admins.object_id
+
 }
