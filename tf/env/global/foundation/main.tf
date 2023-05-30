@@ -6,7 +6,10 @@ terraform {
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "3.58.0"
-      
+    }
+    azuread = {
+      source = "hashicorp/azuread"
+      version = "2.39.0"
     }
   }
   backend "azurerm" {
@@ -24,6 +27,10 @@ terraform {
 provider "azurerm" {
   use_oidc = true
   features {}
+}
+
+provider "azuread" {
+  use_oidc = true
 }
 
 resource "azurerm_resource_group" "init" {
