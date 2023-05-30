@@ -10,7 +10,7 @@ terraform {
     }
     azuread = {
       source = "hashicorp/azuread"
-      version = "2.39.0"
+      version = "=2.39.0"
     }
   }
   backend "azurerm" {
@@ -27,7 +27,7 @@ terraform {
 # Configure the providers
 provider "azurerm" {
   features {}
-  subscription_id = var.environments.shared.sub
+  # subscription_id = var.environments.shared.sub
   use_oidc = true
 }
 
