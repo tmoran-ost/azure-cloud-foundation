@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: test
-          path: artifacts/test.txt
+          path: ./artifacts/test.txt
           if-no-files-found: warn
       
 
