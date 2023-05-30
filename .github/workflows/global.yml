@@ -61,6 +61,7 @@ jobs:
         with:
           name: test
           path: artifacts/test.txt
+          if-no-files-found: warn
       
 
       - name: Update Pull Request
