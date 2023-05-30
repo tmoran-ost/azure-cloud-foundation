@@ -83,7 +83,7 @@ data "azuread_group" "admins" {
 }
 
 data "azuread_service_principal" "globalsp" {
-  display_name = "sp-global-owner-azuredevops"
+  display_name = "azure-cloud-foundation"
 }
 
 # Level 1 - Reference Customer-created top-level management group beneath "Tenant Root Group":
