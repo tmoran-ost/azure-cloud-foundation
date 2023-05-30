@@ -53,7 +53,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: echo terraform plan -out=terraform_plan -no-color 
+        run: terraform plan -out=terraform_plan -no-color 
         uses: actions/upload-artifact@v3
         with:
           name: terraform_plan.tfplan
