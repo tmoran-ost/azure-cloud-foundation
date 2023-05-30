@@ -98,6 +98,12 @@ jobs:
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
+      
+      - name: Download Artifact
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: actions/download-artifact@v3
+        with:
+          name: terraform_plan
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply terraform_plan
