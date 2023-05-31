@@ -102,10 +102,14 @@ jobs:
       
       - name: Download Artifact
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        uses: actions/download-artifact@v3
+        uses: dawidd6/action-download-artifact@v2
         with:
+          workflow: global.yml
+          workflow_conclusion: success
           name: terraform_plan
-          path: tf/env/global/foundation/
+          path: tf/env/global/foundation
+          search_artifacts: true
+          if_no_artifact_found: fail
 
       - name: Test
         run: ls
