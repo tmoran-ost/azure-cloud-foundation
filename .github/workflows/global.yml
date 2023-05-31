@@ -100,11 +100,12 @@ jobs:
         if: steps.plan.outcome == 'failure'
         run: exit 1
       
-      # - name: Download Artifact
-      #   if: github.event_name == 'pull_request'
-      #   uses: actions/download-artifact@v3
-      #   with:
-      #     name: terraform_plan
+      - name: Download Artifact
+        if: github.event_name == 'pull_request'
+        uses: actions/download-artifact@v3
+        with:
+          name: terraform_plan
+          path: tf/env/global/foundation/
 
       - name: Test
         run: ls
