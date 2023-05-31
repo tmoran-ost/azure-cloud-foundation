@@ -58,7 +58,7 @@ jobs:
 
 
       - name: Upload Artifact
-        if: github.event_name == 'pull_request'
+        # if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v3
         with:
           name: terraform_plan
@@ -105,8 +105,9 @@ jobs:
       #   uses: actions/download-artifact@v3
       #   with:
       #     name: terraform_plan
+
       - name: Test
         run: ls
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply /home/runner/work/azure-cloud-foundation/azure-cloud-foundation/terraform_plan
+        run: terraform apply artifacts/terraform_plan.tfplan
