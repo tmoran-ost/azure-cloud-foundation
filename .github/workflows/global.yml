@@ -102,6 +102,7 @@ jobs:
       
       - name: Download Artifact
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        permissions: write-all
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: global.yml
