@@ -105,7 +105,8 @@ jobs:
       #   uses: actions/download-artifact@v3
       #   with:
       #     name: terraform_plan
+      - name: Test
+        run: ls
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: ls
         run: terraform apply terraform_plan
