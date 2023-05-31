@@ -107,4 +107,4 @@ jobs:
           name: terraform_plan
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply terraform_plan
+        run: terraform apply /home/runner/work/azure-cloud-foundation/azure-cloud-foundation/terraform_plan
