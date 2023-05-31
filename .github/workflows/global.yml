@@ -47,11 +47,22 @@ jobs:
         id: validate
         run: terraform validate -no-color
 
+      - name: Artifacts Directory
+        run: mkdir -p artifacts
+
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform plan -out=terraform_plan -no-color
+        run: terraform plan -out=terraform_plan -no-color 
         continue-on-error: true
+
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: terraform_plan
+          path: tf/env/global/foundation/terraform_plan
+      
 
       - name: Update Pull Request
         uses: actions/github-script@v6
@@ -87,6 +98,12 @@ jobs:
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
+      
+      - name: Download Artifact
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: actions/download-artifact@v3
+        with:
+          name: terraform_plan
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply terraform_plan.tfplan
+        run: terraform apply terraform_plan
