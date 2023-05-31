@@ -58,6 +58,7 @@ jobs:
 
 
       - name: Upload Artifact
+        if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v3
         with:
           name: terraform_plan
@@ -100,7 +101,7 @@ jobs:
         run: exit 1
       
       - name: Download Artifact
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: github.event_name == 'pull_request'
         uses: actions/download-artifact@v3
         with:
           name: terraform_plan
