@@ -109,4 +109,4 @@ jobs:
         run: ls
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply artifacts/terraform_plan
+        run: terraform apply artifacts/terraform_plan.tfplan
