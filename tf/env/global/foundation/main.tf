@@ -95,3 +95,15 @@ resource "azurerm_role_assignment" "role-mg-customer-root-owner" {
   principal_id         = data.azuread_group.admins.object_id
 
 }
+
+# Level 2
+resource "azurerm_management_group" "mg-platform" {
+  name                       = "Platform"
+  display_name               = "Platform"
+  parent_management_group_id = data.azurerm_management_group.mg-customer_root.id
+
+  subscription_ids = [
+    var.environments.shared.sub
+  ]
+}
+
