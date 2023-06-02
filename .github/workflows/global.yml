@@ -48,8 +48,6 @@ jobs:
         id: validate
         run: terraform validate -no-color
 
-      - name: Artifacts Directory
-        run: mkdir -p artifacts
 
       - name: Terraform Plan
         id: plan
@@ -113,8 +111,6 @@ jobs:
           search_artifacts: true
           if_no_artifact_found: fail
 
-      - name: Test
-        run: ls
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply terraform_plan
