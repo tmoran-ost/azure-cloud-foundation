@@ -46,6 +46,8 @@ jobs:
         id: validate
         run: terraform validate -no-color
 
+      - name: Artifacts Directory
+        run: mkdir -p artifacts
 
       - name: Terraform Plan
         id: plan
