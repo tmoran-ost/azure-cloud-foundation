@@ -94,10 +94,6 @@ resource "azurerm_role_assignment" "role-mg-customer-root-owner" {
   role_definition_name = "Owner"
   principal_id         = data.azuread_group.admins.object_id
 
-  lifecycle {
-    ignore_changes = [scope, role_definition_name, principal_id]
-  }
-
 }
 
 # Level 2
