@@ -109,9 +109,5 @@ resource "azurerm_management_group" "mg-platform" {
   subscription_ids = [
     var.environments.shared.sub
   ]
-
-  lifecycle {
-    ignore_changes = [name, display_name, parent_management_group_id, subscription_ids]
-  }
 }
 
