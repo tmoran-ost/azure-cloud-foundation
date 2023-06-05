@@ -87,12 +87,19 @@ data "azuread_service_principal" "globalsp" {
 # Level 1 - Reference Customer-created top-level management group beneath "Tenant Root Group":
 data "azurerm_management_group" "mg-customer_root" {
   name = var.cust_management_group
+  lifecycle {
+    ignore_changes = [name]
+  }
 }
 
 resource "azurerm_role_assignment" "role-mg-customer-root-owner" {
   scope                = data.azurerm_management_group.mg-customer_root.id
   role_definition_name = "Owner"
   principal_id         = data.azuread_group.admins.object_id
+
+  lifecycle {
+    ignore_changes = [scope, role_definition_name, principal_id]
+  }
 
 }
 
@@ -105,5 +112,9 @@ resource "azurerm_management_group" "mg-platform" {
   subscription_ids = [
     var.environments.shared.sub
   ]
+
+  lifecycle {
+    ignore_changes = [name, display_name, parent_management_group_id, subscription_ids]
+  }
 }
 
