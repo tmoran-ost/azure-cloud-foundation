@@ -94,6 +94,10 @@ resource "azurerm_role_assignment" "role-mg-customer-root-owner" {
   role_definition_name = "Owner"
   principal_id         = data.azuread_group.admins.object_id
 
+  lifecycle {
+    ignore_changes = [scope, role_definition_name, principal_id]
+  }
+
 }
 
 # Level 2
@@ -105,5 +109,9 @@ resource "azurerm_management_group" "mg-platform" {
   subscription_ids = [
     var.environments.shared.sub
   ]
+
+  lifecycle {
+    ignore_changes = [name, display_name, parent_management_group_id, subscription_ids]
+  }
 }
 
