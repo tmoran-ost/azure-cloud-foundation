@@ -88,7 +88,7 @@ data "azuread_service_principal" "globalsp" {
 data "azurerm_management_group" "mg-customer_root" {
   name = var.cust_management_group
 }
-
+#Trying to import this
 resource "azurerm_role_assignment" "role-mg-customer-root-owner" {
   scope                = data.azurerm_management_group.mg-customer_root.id
   role_definition_name = "Owner"
