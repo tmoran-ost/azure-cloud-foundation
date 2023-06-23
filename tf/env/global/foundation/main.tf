@@ -1,6 +1,7 @@
 # GLOBAL FOUNDATION ENVIRONMENT
 # Terraform initialization
 
+
 terraform {
   required_providers {
     azurerm = {
